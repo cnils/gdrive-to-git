@@ -277,9 +277,14 @@ class Drive2Git:
             gitignore_path = os.path.join(self.local_path, self.name, '.gitignore')
             repo.index.add([gitignore_path])
             
-            repo.index.commit(f'Auto-commit {i+1} (via Google Drive-to-git tool).',
-                              author=self.config['author'],
-                              committer=self.config['author'],
+            # add commit comments
+            if i == 0:
+                comments = f'Auto-commit {i+1} (via Google Drive-to-git tool).'
+            else:
+                comments = 'Initial auto-commit (via Google Drive-to-git tool).'
+            
+            repo.index.commit(comments,
+                              author=self.config['author'], committer=self.config['author'],
                               author_date=cdate, commit_date=cdate)
             
         print(f'\nNew git folder written!')
