@@ -279,9 +279,9 @@ class Drive2Git:
             
             # add commit comments
             if i == 0:
-                comments = f'Auto-commit {i+1} (via Google Drive-to-git tool).'
-            else:
                 comments = 'Initial auto-commit (via Google Drive-to-git tool).'
+            else:
+                comments = f'Auto-commit {i+1} (via Google Drive-to-git tool).'
             
             repo.index.commit(comments,
                               author=self.config['author'], committer=self.config['author'],
