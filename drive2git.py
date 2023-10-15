@@ -70,8 +70,9 @@ class Drive2Git:
         contents = []
         for c in self.drive.folder_contents(folder['id']):
             if c['mimeType'] == 'application/vnd.google-apps.folder':
-                p = os.path.join(path, c['name'])
-                contents.append(self.map_folder(c, path=p))
+                if not self.check_ignore(c, self.ignore_folders):
+                    p = os.path.join(path, c['name'])
+                    contents.append(self.map_folder(c, path=p))
             else:
                 f = {
                     'path': os.path.join(path, c['name']),
